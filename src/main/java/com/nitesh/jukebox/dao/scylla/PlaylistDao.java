@@ -4,7 +4,9 @@ package com.nitesh.jukebox.dao.scylla;
 import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.Result;
 import com.nitesh.jukebox.dao.resource.ScyllaResource;
+import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxMovieAccessor;
 import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxPlaylistAccessor;
+import com.nitesh.jukebox.models.entity.Movie;
 import com.nitesh.jukebox.models.entity.Playlist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -20,12 +22,17 @@ public class PlaylistDao {
 
     public Playlist get(final String playlistId) throws DataAccessException {
         JukeBoxPlaylistAccessor playlistAccessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
-        return playlistAccessor.getPlaylist(playlistId);
+        return playlistAccessor.getPlaylistById(playlistId);
     }
 
     public List<Playlist> get(final List<String> ids) throws DataAccessException {
         JukeBoxPlaylistAccessor playlistAccessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
-        return playlistAccessor.getPlaylists(ids).all();
+        return playlistAccessor.getPlaylistsByIds(ids).all();
+    }
+
+    public List<Playlist> getPlaylistsByName(final String name) throws DataAccessException {
+        JukeBoxPlaylistAccessor accessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
+        return accessor.getPlaylistsByName(name).all();
     }
 
     public Playlist createOrUpdate(final Playlist playlist) throws DataAccessException {

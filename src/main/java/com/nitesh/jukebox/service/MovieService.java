@@ -54,11 +54,6 @@ public class MovieService {
     }
 
     public List<Movie> getMoviesByName(final String movieName) {
-        SearchIndex searchIndex = this.searchIndexDao.getIndexByTypeAndName(SearchIndexType.MOVIE.toString(),
-                movieName);
-        if (searchIndex == null) {
-            return null;
-        }
-        return movieDao.get(searchIndex.getIds());
+        return movieDao.getMoviesByName(movieName);
     }
 }

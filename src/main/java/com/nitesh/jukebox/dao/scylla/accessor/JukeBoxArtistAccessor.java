@@ -11,6 +11,14 @@ import java.util.List;
 
 @Accessor
 public interface JukeBoxArtistAccessor {
-    @Query("SELECT * FROM jukebox.artist WHERE id IN :ids AND rating>=0")
-    Result<Artist> getArtists(@Param("ids") List<String> ids);
+    @Query("SELECT * FROM jukebox.artist WHERE id IN :ids")
+    Result<Artist> getArtistsById(@Param("ids") List<String> ids);
+
+
+    @Query("SELECT * FROM jukebox.artist WHERE name = :name")
+    Result<Artist> getArtistByName(@Param("name") String name);
+
+
+    @Query("SELECT * FROM jukebox.artist WHERE rating IN :ratings")
+    Result<Artist> getArtistsByRating(@Param("ratings") List<Double> ratings);
 }

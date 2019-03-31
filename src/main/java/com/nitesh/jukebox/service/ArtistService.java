@@ -45,11 +45,6 @@ public class ArtistService {
     }
 
     public List<Artist> getArtists(final String artistName) {
-        SearchIndex searchIndex = this.searchIndexDao.getIndexByTypeAndName(SearchIndexType.ARTIST.toString(),
-                artistName);
-        if (searchIndex == null) {
-            return null;
-        }
-        return artistDao.get(searchIndex.getIds());
+        return artistDao.getArtistsByName(artistName);
     }
 }

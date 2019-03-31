@@ -58,12 +58,7 @@ public class SongService {
     }
 
     public List<Song> getSongsByName(final String songName) {
-        SearchIndex searchIndex = this.searchIndexDao.getIndexByTypeAndName(SearchIndexType.SONG.toString(),
-                songName);
-        if (searchIndex == null) {
-            return null;
-        }
-        return songDao.get(searchIndex.getIds());
+        return songDao.getSongsByName(songName);
     }
 
     public List<Song> getSongsByIds(final List<String> songIds) {

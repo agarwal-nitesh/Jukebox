@@ -42,12 +42,7 @@ public class JukeBoxService {
     }
 
     public List<Playlist> getPlaylist(String name) {
-        SearchIndex searchIndex = this.searchIndexDao.getIndexByTypeAndName(SearchIndexType.PLAYLIST.toString(),
-                name);
-        if (searchIndex == null) {
-            return null;
-        }
-        return this.playlistDao.get(searchIndex.getIds());
+        return this.playlistDao.getPlaylistsByName(name);
     }
 
     public boolean updateSongsToPlaylist(String playlistId, String songId) {

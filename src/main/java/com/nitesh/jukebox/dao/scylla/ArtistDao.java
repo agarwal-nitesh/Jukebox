@@ -19,7 +19,12 @@ public class ArtistDao {
 
     public List<Artist> get(final List<String> artistIds) throws DataAccessException {
         JukeBoxArtistAccessor accessor = scyllaResource.getAccessor(JukeBoxArtistAccessor.class);
-        return accessor.getArtists(artistIds).all();
+        return accessor.getArtistsById(artistIds).all();
+    }
+
+    public List<Artist> getArtistsByName(final String name) throws DataAccessException {
+        JukeBoxArtistAccessor accessor = scyllaResource.getAccessor(JukeBoxArtistAccessor.class);
+        return accessor.getArtistByName(name).all();
     }
 
     public Artist createOrUpdate(final Artist artist) throws DataAccessException {

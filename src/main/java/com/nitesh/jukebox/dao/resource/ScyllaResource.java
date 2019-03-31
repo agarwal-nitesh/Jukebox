@@ -37,7 +37,6 @@ public class ScyllaResource {
             JukeBoxSearchIndexAccessor.class,
             JukeBoxArtistAccessor.class,
             JukeBoxSongAccessor.class,
-            JukeBoxPlaylistAccessor.class,
             JukeBoxMovieAccessor.class
     );
 
