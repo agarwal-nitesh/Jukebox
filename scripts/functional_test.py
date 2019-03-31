@@ -239,7 +239,7 @@ for i in range(0, 100):
     print(data.decode("utf-8"))
 
 
-for i in range(0,50)
+for i in range(0,50):
     conn.request("GET", "/song?name=November%20Rain", headers=headers)
 
     res = conn.getresponse()
@@ -247,7 +247,7 @@ for i in range(0,50)
 
     print(data.decode("utf-8"))
 
-for i in range(0,30)
+for i in range(0,30):
     conn.request("GET", "/song?name=Counting%20Stars", headers=headers)
 
     res = conn.getresponse()
