@@ -1,6 +1,7 @@
 package com.nitesh.jukebox.controller;
 
 import com.nitesh.jukebox.models.entity.Movie;
+import com.nitesh.jukebox.models.entity.Song;
 import com.nitesh.jukebox.models.request.MovieCreateRequest;
 import com.nitesh.jukebox.models.response.Response;
 import com.nitesh.jukebox.service.MovieService;
@@ -78,6 +79,24 @@ public class MovieController {
             List<Movie> movies = movieService.getMoviesByRating(low, high);
 
             return new Response<List<Movie>>().builder()
+                    .data(movies)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Movie>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
+
+    @RequestMapping(value = "/movies", method = RequestMethod.POST)
+    public Response getSongsByIds(@RequestBody List<String> songIds) throws Exception {
+        try {
+
+            List<Movie> movies = this.movieService.getMovieByIds(songIds);
+
+            return new Response<List<Song>>().builder()
                     .data(movies)
                     .statusCode(HttpStatus.OK.value())
                     .build();

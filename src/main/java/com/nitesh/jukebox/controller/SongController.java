@@ -90,4 +90,23 @@ public class SongController {
                     .build();
         }
     }
+
+
+    @RequestMapping(value = "/songs", method = RequestMethod.POST)
+    public Response getSongsByIds(@RequestBody List<String> songIds) throws Exception {
+        try {
+
+            List<Song> songs = this.songService.getSongsByIds(songIds);
+
+            return new Response<List<Song>>().builder()
+                    .data(songs)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Song>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
 }

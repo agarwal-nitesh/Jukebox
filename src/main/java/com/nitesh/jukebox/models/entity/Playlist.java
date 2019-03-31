@@ -34,4 +34,8 @@ public class Playlist {
     @JsonProperty(value = "movies")
     @Column(name = "movies")
     List<String> movieIds;
+
+    @JsonProperty(value = "rating")
+    @Column(name = "rating")
+    Double rating;
 }

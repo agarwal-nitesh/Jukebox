@@ -30,8 +30,10 @@ public class JukeBoxService {
 
         Playlist playlist = Playlist.builder()
                 .id(UUID.randomUUID().toString())
+                .name(playlistCreateRequest.getName())
                 .movieIds(playlistCreateRequest.getMovieList())
                 .songIds(playlistCreateRequest.getSongList())
+                .rating(playlistCreateRequest.getRating())
                 .build();
         return playlistDao.createOrUpdate(playlist);
     }

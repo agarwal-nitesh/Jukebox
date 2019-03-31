@@ -20,4 +20,6 @@ public class PlaylistCreateRequest {
     List<String> movieList;
     @JsonProperty(value = "isDuplicate")
     Boolean isDuplicate;
+    @JsonProperty(value = "rating")
+    Double rating;
 }

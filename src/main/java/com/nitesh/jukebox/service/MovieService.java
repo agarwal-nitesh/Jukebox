@@ -63,4 +63,8 @@ public class MovieService {
     public List<Movie> getMoviesByRating(final Double low, final Double high) {
         return this.movieDao.getMoviesByRating(low, high);
     }
+
+    public List<Movie> getMovieByIds(final List<String> movieIds) {
+        return this.movieDao.get(movieIds);
+    }
 }
