@@ -17,6 +17,9 @@ public class MovieService {
     MovieDao movieDao;
 
     @Autowired
+    TrendingService trendingService;
+
+    @Autowired
     ArtistService artistService;
 
     public Movie createMovie(final MovieCreateRequest movieCreateRequest) throws UnsatisfiedServletRequestParameterException {
@@ -66,5 +69,10 @@ public class MovieService {
 
     public List<Movie> getMovieByIds(final List<String> movieIds) {
         return this.movieDao.get(movieIds);
+    }
+
+    public List<Movie> getTrendingMovies() {
+        List<String> ids = this.trendingService.getTrendingMedia(TrendingMediaType.MOVIE);
+        return this.getMovieByIds(ids);
     }
 }

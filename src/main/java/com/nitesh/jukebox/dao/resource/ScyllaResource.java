@@ -37,7 +37,8 @@ public class ScyllaResource {
             JukeBoxArtistAccessor.class,
             JukeBoxSongAccessor.class,
             JukeBoxMovieAccessor.class,
-            JukeBoxPlaylistAccessor.class
+            JukeBoxPlaylistAccessor.class,
+            JukeBoxTrendingMediaAccessor.class
     );
 
     private Cluster cluster;

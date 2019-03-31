@@ -109,4 +109,40 @@ public class SongController {
                     .build();
         }
     }
+
+    @RequestMapping(value = "/songs/trending", method = RequestMethod.POST)
+    public Response getTrendingSongs() throws Exception {
+        try {
+
+            List<Song> songs = this.songService.getTrendingSongs();
+
+            return new Response<List<Song>>().builder()
+                    .data(songs)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Song>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
+
+    @RequestMapping(value = "/songs/select/{songId}", method = RequestMethod.POST)
+    public Response getSongsByIds(@PathVariable(value = "songId") String songId) throws Exception {
+        try {
+
+            this.songService.selectSongToPlay(songId);
+
+            return new Response<List<Song>>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Song>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
 }

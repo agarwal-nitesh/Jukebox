@@ -3,6 +3,7 @@ package com.nitesh.jukebox.service;
 
 import com.nitesh.jukebox.dao.scylla.ArtistDao;
 import com.nitesh.jukebox.models.entity.Artist;
+import com.nitesh.jukebox.models.entity.TrendingMediaType;
 import com.nitesh.jukebox.models.request.ArtistCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class ArtistService {
 
     @Autowired
     ArtistDao artistDao;
+
+    @Autowired
+    TrendingService trendingService;
 
 
     public Artist createArtist(final ArtistCreateRequest artistCreateRequest) {
@@ -41,11 +45,20 @@ public class ArtistService {
         return artistDao.getArtistsByName(artistName);
     }
 
+    public List<Artist> getArtistsByIds(final List<String> artistIds) {
+        return artistDao.get(artistIds);
+    }
+
     public List<Artist> getAllArtists() {
         return artistDao.getAllArtists();
     }
 
     public List<Artist> getArtistsByRating(final double low, final double high) {
         return this.artistDao.getArtistsByRating(low, high);
+    }
+
+    public List<Artist> getTrendingArtists() {
+        List<String> ids = this.trendingService.getTrendingMedia(TrendingMediaType.ARTIST);
+        return this.getArtistsByIds(ids);
     }
 }

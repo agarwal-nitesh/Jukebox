@@ -45,10 +45,12 @@ CREATE TABLE jukebox.playlist(
 
 CREATE INDEX playlist_name_index ON jukebox.playlist(name);
 
-CREATE TABLE jukebox.trending_search(
+CREATE TABLE jukebox.trending_media(
+    type text,
+    updated_at bigint,
     id text,
-    count bigint,
-    PRIMARY KEY(id, count)
+    access_count counter,
+    PRIMARY KEY(type, updated_at, id)
 );
 
 CREATE MATERIALIZED VIEW jukebox.mv_song_by_artist_id AS

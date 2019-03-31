@@ -16,6 +16,9 @@ public class JukeBoxService {
     @Autowired
     PlaylistDao playlistDao;
 
+    @Autowired
+    TrendingService trendingService;
+
     public Playlist createPlaylist(final PlaylistCreateRequest playlistCreateRequest) {
         /*
             When isDuplicate param is false or not passed, check if playlist name already exists.
@@ -59,5 +62,14 @@ public class JukeBoxService {
 
     public List<Playlist> getPlaylistByRating(final Double low, final Double high) {
         return this.playlistDao.getPlaylistByRating(low, high);
+    }
+
+    public List<Playlist> getPlaylistByIds(final List<String> ids) {
+        return this.playlistDao.get(ids);
+    }
+
+    public List<Playlist> getTrendingPlaylists() {
+        List<String> ids = this.trendingService.getTrendingMedia(TrendingMediaType.PLAYLIST);
+        return this.getPlaylistByIds(ids);
     }
 }
