@@ -41,6 +41,7 @@ public class MovieService {
                     .id(UUID.randomUUID().toString())
                     .name(movieCreateRequest.getName())
                     .rating(movieCreateRequest.getRating())
+                    .url(movieCreateRequest.getUrl())
                     .build();
             return this.movieDao.createOrUpdate(movie);
         } else {
@@ -59,7 +60,7 @@ public class MovieService {
         return movieDao.getMoviesByName(movieName);
     }
 
-    public List<Movie> getMoviesByRating(final int low, final int high) {
+    public List<Movie> getMoviesByRating(final Double low, final Double high) {
         return this.movieDao.getMoviesByRating(low, high);
     }
 }

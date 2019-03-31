@@ -1,6 +1,5 @@
 package com.nitesh.jukebox.controller;
 
-import com.nitesh.jukebox.models.entity.Movie;
 import com.nitesh.jukebox.models.entity.Playlist;
 import com.nitesh.jukebox.models.request.PlaylistCreateRequest;
 import com.nitesh.jukebox.models.response.Response;
@@ -88,13 +87,13 @@ public class PlaylistController {
     }
 
     @RequestMapping(value = "/playlist/rating", method = RequestMethod.GET)
-    public Response getPlaylistByRating(@RequestParam(value = "low") Integer low, @RequestParam(value = "low") Integer high) throws Exception {
+    public Response getPlaylistByRating(@RequestParam(value = "low") Double low, @RequestParam(value = "high") Double high) throws Exception {
         try {
             if(high == null) {
-                high = 5;
+                high = 5D;
             }
             if(low == null) {
-                low = 0;
+                low = 0D;
             }
             List<Playlist> playlists = this.jukeBoxService.getPlaylistByRating(low, high);
 

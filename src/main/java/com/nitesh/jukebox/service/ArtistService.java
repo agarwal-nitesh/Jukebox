@@ -3,8 +3,6 @@ package com.nitesh.jukebox.service;
 
 import com.nitesh.jukebox.dao.scylla.ArtistDao;
 import com.nitesh.jukebox.models.entity.Artist;
-import com.nitesh.jukebox.models.entity.SearchIndexType;
-import com.nitesh.jukebox.models.entity.Song;
 import com.nitesh.jukebox.models.request.ArtistCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +45,7 @@ public class ArtistService {
         return artistDao.getAllArtists();
     }
 
-    public List<Artist> getArtistsByRating(final int low, final int high) {
+    public List<Artist> getArtistsByRating(final double low, final double high) {
         return this.artistDao.getArtistsByRating(low, high);
     }
 }

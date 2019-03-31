@@ -4,8 +4,6 @@ import com.datastax.driver.mapping.Result;
 import com.datastax.driver.mapping.annotations.Accessor;
 import com.datastax.driver.mapping.annotations.Param;
 import com.datastax.driver.mapping.annotations.Query;
-import com.nitesh.jukebox.models.entity.Artist;
-import com.nitesh.jukebox.models.entity.Movie;
 import com.nitesh.jukebox.models.entity.Song;
 
 import java.util.List;
@@ -22,5 +20,5 @@ public interface JukeBoxSongAccessor {
     Result<Song> getSongsByArtistIds(@Param("ids") List<String> ids);
 
     @Query("SELECT * FROM jukebox.song WHERE rating <= :high AND rating >= :low ALLOW FILTERING")
-    Result<Song> getSongsByRating(@Param("low") Integer low, @Param("high") Integer high);
+    Result<Song> getSongsByRating(@Param("low") Double low, @Param("high") Double high);
 }

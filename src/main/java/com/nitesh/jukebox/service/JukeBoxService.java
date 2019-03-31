@@ -55,7 +55,7 @@ public class JukeBoxService {
         return true;
     }
 
-    public List<Playlist> getPlaylistByRating(final int low, final int high) {
+    public List<Playlist> getPlaylistByRating(final Double low, final Double high) {
         return this.playlistDao.getPlaylistByRating(low, high);
     }
 }

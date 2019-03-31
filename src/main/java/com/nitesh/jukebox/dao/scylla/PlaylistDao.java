@@ -2,19 +2,13 @@ package com.nitesh.jukebox.dao.scylla;
 
 
 import com.datastax.driver.mapping.Mapper;
-import com.datastax.driver.mapping.Result;
 import com.nitesh.jukebox.dao.resource.ScyllaResource;
-import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxMovieAccessor;
 import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxPlaylistAccessor;
-import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxSongAccessor;
-import com.nitesh.jukebox.models.entity.Movie;
 import com.nitesh.jukebox.models.entity.Playlist;
-import com.nitesh.jukebox.models.entity.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +58,7 @@ public class PlaylistDao {
         playlistMapper.delete(playlistId);
     }
 
-    public List<Playlist> getPlaylistByRating(final int low, final int high) {
+    public List<Playlist> getPlaylistByRating(final Double low, final Double high) {
         JukeBoxPlaylistAccessor accessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
         return accessor.getPlaylistByRating(low, high).all();
     }

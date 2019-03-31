@@ -26,5 +26,5 @@ public interface JukeBoxPlaylistAccessor {
     void updateMovieToPlaylist(List<String> ids, String id);
 
     @Query("SELECT * FROM jukebox.playlist WHERE rating <= :high AND rating >= :low ALLOW FILTERING")
-    Result<Playlist> getPlaylistByRating(@Param("low") Integer low, @Param("high") Integer high);
+    Result<Playlist> getPlaylistByRating(@Param("low") Double low, @Param("high") Double high);
 }

@@ -43,6 +43,7 @@ public class SongService {
                     .id(UUID.randomUUID().toString())
                     .name(songCreateRequest.getName())
                     .rating(songCreateRequest.getRating())
+                    .url(songCreateRequest.getUrl())
                     .build();
             return this.songDao.createOrUpdate(song);
         } else {
@@ -61,7 +62,7 @@ public class SongService {
         return songDao.getSongsByArtistIds(artistIds);
     }
 
-    public List<Song> getSongsByRating(final int low, final int high) {
+    public List<Song> getSongsByRating(final Double low, final Double high) {
         return this.songDao.getSongsByRating(low, high);
     }
 

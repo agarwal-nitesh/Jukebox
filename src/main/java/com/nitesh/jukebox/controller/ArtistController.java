@@ -67,13 +67,13 @@ public class ArtistController {
     }
 
     @RequestMapping(value = "/artist/rating", method = RequestMethod.GET)
-    public Response getArtistsByRating(@RequestParam(value = "low") Integer low, @RequestParam(value = "low") Integer high) throws Exception {
+    public Response getArtistsByRating(@RequestParam(value = "low") Double low, @RequestParam(value = "high") Double high) throws Exception {
         try {
             if(high == null) {
-                high = 5;
+                high = 5D;
             }
             if(low == null) {
-                low = 0;
+                low = 0D;
             }
             List<Artist> artists = artistService.getArtistsByRating(low, high);
 

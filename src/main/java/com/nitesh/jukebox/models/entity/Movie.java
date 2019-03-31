@@ -37,6 +37,4 @@ public class Movie {
     @JsonProperty(value = "rating")
     @Column(name = "rating")
     double rating;
-
-
 }

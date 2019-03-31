@@ -20,7 +20,7 @@ public interface JukeBoxArtistAccessor {
 
 
     @Query("SELECT * FROM jukebox.artist WHERE rating <= :high AND rating >= :low ALLOW FILTERING")
-    Result<Artist> getArtistsByRating(@Param("low") Integer low, @Param("high") Integer high);
+    Result<Artist> getArtistsByRating(@Param("low") Double low, @Param("high") Double high);
 
     @Query("SELECT * FROM jukebox.artist")
     Result<Artist> getAllArtists();
