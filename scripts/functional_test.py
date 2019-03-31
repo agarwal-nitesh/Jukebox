@@ -228,4 +228,39 @@ data = res.read()
 print(data.decode("utf-8"))
 
 
-# --------------------------------------- CREATE PLAYLIST -------------------------------------
+# --------------------------------------- GET SONG BY NAME -------------------------------------
+
+for i in range(0, 100):
+    conn.request("GET", "/song?name=Bohemian%20Rhapsody", headers=headers)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    print(data.decode("utf-8"))
+
+
+for i in range(0,50)
+    conn.request("GET", "/song?name=November%20Rain", headers=headers)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    print(data.decode("utf-8"))
+
+for i in range(0,30)
+    conn.request("GET", "/song?name=Counting%20Stars", headers=headers)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    print(data.decode("utf-8"))
+
+    conn.request("GET", "/song?name=Money", headers=headers)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    conn.request("GET", "/song?name=Comfortably%20Numb", headers=headers)
+
+    res = conn.getresponse()
+    data = res.read()
