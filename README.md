@@ -1,9 +1,9 @@
-### com.nitesh.MvsProject
+### com.nitesh.jukebox
 
 #### Test, Build & Run 
 ```
 mvn package
-java -jar target/com.nitesh.MvsProject-1.0-SNAPSHOT.jar
+java -jar target/com.nitesh.jukebox-1.0-SNAPSHOT.jar
 ```
 
 ##### Setup Scylla
