@@ -2,6 +2,7 @@ package com.nitesh.jukebox.dao.scylla;
 
 
 import com.datastax.driver.mapping.Mapper;
+import com.datastax.driver.mapping.Result;
 import com.nitesh.jukebox.dao.resource.ScyllaResource;
 import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxPlaylistAccessor;
 import com.nitesh.jukebox.models.entity.Playlist;
@@ -31,6 +32,18 @@ public class PlaylistDao {
         Mapper<Playlist> playlistMapper = scyllaResource.getMapper(Playlist.class);
         playlistMapper.save(playlist);
         return playlist;
+    }
+
+    public void addSongToPlaylist(final String playlistId, final List<String> songs) throws DataAccessException {
+        JukeBoxPlaylistAccessor accessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
+        Result result =  accessor.updateSongToPlaylist(songs, playlistId);
+        System.out.println(result.toString());
+    }
+
+    public void addMoviesToPlaylist(final String playlistId, final List<String> movies) throws DataAccessException {
+        JukeBoxPlaylistAccessor accessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
+        Result result =  accessor.updateMovieToPlaylist(movies, playlistId);
+        System.out.println(result.toString());
     }
 
     public void delete(final String playlistId) throws DataAccessException {

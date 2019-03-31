@@ -14,4 +14,10 @@ public interface JukeBoxPlaylistAccessor {
 
     @Query("SELECT * FROM jukebox.playlist WHERE id = :id AND rating >=0")
     Playlist getPlaylist(String id);
+
+    @Query("UPDATE jukebox.playlist SET songs = songs + :ids WHERE id = :id AND rating>=0")
+    Result updateSongToPlaylist(List<String> ids, String id);
+
+    @Query("UPDATE jukebox.playlist SET movies = movies + :ids WHERE id = :id AND rating>=0")
+    Result updateMovieToPlaylist(List<String> ids, String id);
 }

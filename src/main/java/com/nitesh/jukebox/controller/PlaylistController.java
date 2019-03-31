@@ -49,4 +49,40 @@ public class PlaylistController {
                     .build();
         }
     }
+
+    @RequestMapping(value = "/playlist/song/{playlistId}/{songId}", method = RequestMethod.GET)
+    public Response addSongToPlaylist(@PathVariable(value = "playlistId") String playlistId,
+                                      @PathVariable(value = "songId") String songId) throws Exception {
+        try {
+            boolean response = jukeBoxService.updateSongsToPlaylist(playlistId, songId);
+
+            return new Response<Boolean>().builder()
+                    .data(response)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Boolean>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
+
+    @RequestMapping(value = "/playlist/movie/{playlistId}/{movieId}", method = RequestMethod.GET)
+    public Response addMovieToPlaylist(@PathVariable(value = "playlistId") String playlistId,
+                                      @PathVariable(value = "movieId") String movieId) throws Exception {
+        try {
+            boolean response = jukeBoxService.updateMoviesToPlaylist(playlistId, movieId);
+
+            return new Response<Boolean>().builder()
+                    .data(response)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Boolean>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
 }

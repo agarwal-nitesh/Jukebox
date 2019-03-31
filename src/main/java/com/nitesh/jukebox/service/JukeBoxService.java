@@ -7,6 +7,7 @@ import com.nitesh.jukebox.models.request.PlaylistCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,5 +48,20 @@ public class JukeBoxService {
             return null;
         }
         return this.playlistDao.get(searchIndex.getIds());
+    }
+
+    public boolean updateSongsToPlaylist(String playlistId, String songId) {
+        List<String> songIds = new ArrayList<>();
+        songIds.add(songId);
+        this.playlistDao.addSongToPlaylist(playlistId, songIds);
+        return true;
+
+    }
+
+    public boolean updateMoviesToPlaylist(String playlistId, String movieId) {
+        List<String> movieIds = new ArrayList<>();
+        movieIds.add(movieId);
+        this.playlistDao.addMoviesToPlaylist(playlistId, movieIds);
+        return true;
     }
 }
