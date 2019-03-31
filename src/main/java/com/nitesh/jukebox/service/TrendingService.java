@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,17 +18,16 @@ public class TrendingService {
     TrendingDao trendingDao;
 
 
+    ExecutorService trendingUpdateWorkersPool = Executors.newFixedThreadPool(25);
+
 
     @Value("${trending.NumberOfMedias}")
     private Long maxTrendingMedia;
 
-    /*
-        Can use ExecutorService to enqueue trending update requests using a thread pool to unblock get requests.
-        TODO: Later
-     */
-
     public void incrementMediaAccessCount(TrendingMediaType trendingMediaType, String mediaId) {
-        this.trendingDao.incrementCounter(trendingMediaType, mediaId);
+        this.trendingUpdateWorkersPool.execute(() -> {
+            this.trendingDao.incrementCounter(trendingMediaType, mediaId);
+        });
     }
 
     /*
