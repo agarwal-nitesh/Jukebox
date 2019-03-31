@@ -1,5 +1,6 @@
 package com.nitesh.jukebox.controller;
 
+import com.nitesh.jukebox.models.entity.Artist;
 import com.nitesh.jukebox.models.entity.Movie;
 import com.nitesh.jukebox.models.entity.Song;
 import com.nitesh.jukebox.models.request.MovieCreateRequest;
@@ -61,6 +62,29 @@ public class MovieController {
                     .build();
         } catch (Exception e) {
             return new Response<List<Movie>>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
+
+    @RequestMapping(value = "/movie/rating", method = RequestMethod.GET)
+    public Response getMoviesByRating(@RequestParam(value = "low") Integer low, @RequestParam(value = "low") Integer high) throws Exception {
+        try {
+            if(high == null) {
+                high = 5;
+            }
+            if(low == null) {
+                low = 0;
+            }
+            List<Movie> movies = movieService.getMoviesByRating(low, high);
+
+            return new Response<List<Movie>>().builder()
+                    .data(movies)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Movie>().builder()
                     .data(null)
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .build();

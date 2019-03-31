@@ -65,4 +65,27 @@ public class ArtistController {
                     .build();
         }
     }
+
+    @RequestMapping(value = "/artist/rating", method = RequestMethod.GET)
+    public Response getArtistsByRating(@RequestParam(value = "low") Integer low, @RequestParam(value = "low") Integer high) throws Exception {
+        try {
+            if(high == null) {
+                high = 5;
+            }
+            if(low == null) {
+                low = 0;
+            }
+            List<Artist> artists = artistService.getArtistsByRating(low, high);
+
+            return new Response<List<Artist>>().builder()
+                    .data(artists)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Artist>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
 }

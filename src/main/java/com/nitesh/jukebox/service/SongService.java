@@ -61,6 +61,10 @@ public class SongService {
         return songDao.getSongsByArtistIds(artistIds);
     }
 
+    public List<Song> getSongsByRating(final int low, final int high) {
+        return this.songDao.getSongsByRating(low, high);
+    }
+
     public List<Song> getSongsByIds(final List<String> songIds) {
         return this.songDao.get(songIds);
     }

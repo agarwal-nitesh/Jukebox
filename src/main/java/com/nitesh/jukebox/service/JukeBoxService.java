@@ -54,4 +54,8 @@ public class JukeBoxService {
         this.playlistDao.addMoviesToPlaylist(playlistId, movieIds);
         return true;
     }
+
+    public List<Playlist> getPlaylistByRating(final int low, final int high) {
+        return this.playlistDao.getPlaylistByRating(low, high);
+    }
 }

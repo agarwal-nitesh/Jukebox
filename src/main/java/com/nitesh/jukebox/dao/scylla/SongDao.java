@@ -42,4 +42,9 @@ public class SongDao {
         JukeBoxSongAccessor accessor = scyllaResource.getAccessor(JukeBoxSongAccessor.class);
         return accessor.getSongsByArtistIds(ids).all();
     }
+
+    public List<Song> getSongsByRating(final int low, final int high) {
+        JukeBoxSongAccessor accessor = scyllaResource.getAccessor(JukeBoxSongAccessor.class);
+        return accessor.getSongsByRating(low, high).all();
+    }
 }

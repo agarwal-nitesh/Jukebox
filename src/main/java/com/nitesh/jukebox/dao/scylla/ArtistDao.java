@@ -4,7 +4,9 @@ package com.nitesh.jukebox.dao.scylla;
 import com.datastax.driver.mapping.Mapper;
 import com.nitesh.jukebox.dao.resource.ScyllaResource;
 import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxArtistAccessor;
+import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxMovieAccessor;
 import com.nitesh.jukebox.models.entity.Artist;
+import com.nitesh.jukebox.models.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -42,5 +44,10 @@ public class ArtistDao {
     public void delete(final String artistId) throws DataAccessException {
         Mapper<Artist> artistMapper = scyllaResource.getMapper(Artist.class);
         artistMapper.delete(artistId);
+    }
+
+    public List<Artist> getArtistsByRating(final int low, final int high) {
+        JukeBoxArtistAccessor accessor = scyllaResource.getAccessor(JukeBoxArtistAccessor.class);
+        return accessor.getArtistsByRating(low, high).all();
     }
 }
