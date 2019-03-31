@@ -20,4 +20,7 @@ public interface JukeBoxSongAccessor {
 
     @Query("SELECT * FROM jukebox.mv_song_by_artist_id WHERE artist_id IN :ids")
     Result<Song> getSongsByArtistIds(@Param("ids") List<String> ids);
+
+    @Query("SELECT * FROM jukebox.song WHERE rating <= :high AND rating >= :low ALLOW FILTERING")
+    Result<Song> getSongsByRating(@Param("low") Integer low, @Param("high") Integer high);
 }

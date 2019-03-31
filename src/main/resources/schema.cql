@@ -11,7 +11,6 @@ CREATE TABLE jukebox.movie(
 );
 
 CREATE INDEX movie_name_index ON jukebox.movie(name);
-CREATE INDEX movie_rating_index ON jukebox.movie(rating);
 
 
 CREATE TABLE jukebox.song(
@@ -24,7 +23,6 @@ CREATE TABLE jukebox.song(
 );
 
 CREATE INDEX song_name_index ON jukebox.song(name);
-CREATE INDEX song_rating_index ON jukebox.song(rating);
 
 
 CREATE TABLE jukebox.artist(
@@ -35,8 +33,6 @@ CREATE TABLE jukebox.artist(
 );
 
 CREATE INDEX artist_name_index ON jukebox.artist(name);
-CREATE INDEX artist_rating_index ON jukebox.artist(rating);
-
 
 CREATE TABLE jukebox.playlist(
     id text,
@@ -48,7 +44,6 @@ CREATE TABLE jukebox.playlist(
 );
 
 CREATE INDEX playlist_name_index ON jukebox.playlist(name);
-CREATE INDEX playlist_rating_index ON jukebox.playlist(rating);
 
 CREATE TABLE jukebox.trending_search(
     id text,

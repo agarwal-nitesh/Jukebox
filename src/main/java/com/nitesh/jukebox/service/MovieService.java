@@ -1,7 +1,6 @@
 package com.nitesh.jukebox.service;
 
 import com.nitesh.jukebox.dao.scylla.MovieDao;
-import com.nitesh.jukebox.dao.scylla.SearchIndexDao;
 import com.nitesh.jukebox.models.entity.*;
 import com.nitesh.jukebox.models.request.MovieCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,12 @@ import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
     @Autowired
     MovieDao movieDao;
-
-    @Autowired
-    SearchIndexDao searchIndexDao;
 
     @Autowired
     ArtistService artistService;
@@ -45,12 +42,17 @@ public class MovieService {
                     .name(movieCreateRequest.getName())
                     .rating(movieCreateRequest.getRating())
                     .build();
-            searchIndexDao.addIndex(SearchIndexType.MOVIE.toString(), movie.getName(), movie.getId());
             return this.movieDao.createOrUpdate(movie);
         } else {
             throw new UnsatisfiedServletRequestParameterException(new String[]{"Artist not found"}, null);
         }
 
+    }
+
+    public List<Movie> getMoviesByArtistId(final String artistName) {
+        List<Artist> artists = this.artistService.getArtists(artistName);
+        List<String> artistIds = artists.stream().map(artist -> artist.getId()).collect(Collectors.toList());
+        return movieDao.getMoviesByArtistNames(artistIds);
     }
 
     public List<Movie> getMoviesByName(final String movieName) {

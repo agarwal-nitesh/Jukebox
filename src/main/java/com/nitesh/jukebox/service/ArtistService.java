@@ -2,9 +2,7 @@ package com.nitesh.jukebox.service;
 
 
 import com.nitesh.jukebox.dao.scylla.ArtistDao;
-import com.nitesh.jukebox.dao.scylla.SearchIndexDao;
 import com.nitesh.jukebox.models.entity.Artist;
-import com.nitesh.jukebox.models.entity.SearchIndex;
 import com.nitesh.jukebox.models.entity.SearchIndexType;
 import com.nitesh.jukebox.models.request.ArtistCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,6 @@ import java.util.UUID;
 
 @Service
 public class ArtistService {
-
-    @Autowired
-    SearchIndexDao searchIndexDao;
 
     @Autowired
     ArtistDao artistDao;
@@ -40,11 +35,14 @@ public class ArtistService {
                 .name(artistCreateRequest.getName())
                 .rating(artistCreateRequest.getRating())
                 .build();
-        searchIndexDao.addIndex(SearchIndexType.ARTIST.toString(), artist.getName(), artist.getId());
         return artistDao.createOrUpdate(artist);
     }
 
     public List<Artist> getArtists(final String artistName) {
         return artistDao.getArtistsByName(artistName);
+    }
+
+    public List<Artist> getAllArtists() {
+        return artistDao.getAllArtists();
     }
 }

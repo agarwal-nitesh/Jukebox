@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,9 +22,13 @@ public class PlaylistDao {
     @Autowired
     ScyllaResource scyllaResource;
 
-    public Playlist get(final String playlistId) throws DataAccessException {
+    public List<Playlist> get(final String playlistId) throws DataAccessException {
         JukeBoxPlaylistAccessor playlistAccessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
-        return playlistAccessor.getPlaylistById(playlistId);
+        List<Playlist> playlists = playlistAccessor.getPlaylistById(playlistId).all();
+        if (playlists != null) {
+            return playlists;
+        }
+        return new ArrayList<Playlist>();
     }
 
     public List<Playlist> get(final List<String> ids) throws DataAccessException {
@@ -43,14 +49,12 @@ public class PlaylistDao {
 
     public void addSongToPlaylist(final String playlistId, final List<String> songs) throws DataAccessException {
         JukeBoxPlaylistAccessor accessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
-        Result result =  accessor.updateSongToPlaylist(songs, playlistId);
-        System.out.println(result.toString());
+        accessor.updateSongToPlaylist(songs, playlistId);
     }
 
     public void addMoviesToPlaylist(final String playlistId, final List<String> movies) throws DataAccessException {
         JukeBoxPlaylistAccessor accessor = scyllaResource.getAccessor(JukeBoxPlaylistAccessor.class);
-        Result result =  accessor.updateMovieToPlaylist(movies, playlistId);
-        System.out.println(result.toString());
+        accessor.updateMovieToPlaylist(movies, playlistId);
     }
 
     public void delete(final String playlistId) throws DataAccessException {

@@ -1,7 +1,6 @@
 package com.nitesh.jukebox.service;
 
 import com.nitesh.jukebox.dao.scylla.PlaylistDao;
-import com.nitesh.jukebox.dao.scylla.SearchIndexDao;
 import com.nitesh.jukebox.models.entity.*;
 import com.nitesh.jukebox.models.request.PlaylistCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ public class JukeBoxService {
 
     @Autowired
     PlaylistDao playlistDao;
-
-    @Autowired
-    SearchIndexDao searchIndexDao;
 
     public Playlist createPlaylist(final PlaylistCreateRequest playlistCreateRequest) {
         /*
@@ -37,7 +33,6 @@ public class JukeBoxService {
                 .movieIds(playlistCreateRequest.getMovieList())
                 .songIds(playlistCreateRequest.getSongList())
                 .build();
-        searchIndexDao.addIndex(SearchIndexType.PLAYLIST.toString(), playlist.getName(), playlist.getId());
         return playlistDao.createOrUpdate(playlist);
     }
 

@@ -5,8 +5,10 @@ import com.datastax.driver.mapping.Mapper;
 import com.nitesh.jukebox.dao.resource.ScyllaResource;
 import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxArtistAccessor;
 import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxMovieAccessor;
+import com.nitesh.jukebox.dao.scylla.accessor.JukeBoxSongAccessor;
 import com.nitesh.jukebox.models.entity.Artist;
 import com.nitesh.jukebox.models.entity.Movie;
+import com.nitesh.jukebox.models.entity.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -27,6 +29,11 @@ public class MovieDao {
     public List<Movie> getMoviesByName(final String name) throws DataAccessException {
         JukeBoxMovieAccessor accessor = scyllaResource.getAccessor(JukeBoxMovieAccessor.class);
         return accessor.getMoviesByName(name).all();
+    }
+
+    public List<Movie> getMoviesByArtistNames(final List<String> ids) throws DataAccessException {
+        JukeBoxMovieAccessor accessor = scyllaResource.getAccessor(JukeBoxMovieAccessor.class);
+        return accessor.getMoviesByArtistIds(ids).all();
     }
 
     public Movie createOrUpdate(final Movie movie) throws DataAccessException {

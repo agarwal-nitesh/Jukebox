@@ -19,6 +19,9 @@ public interface JukeBoxArtistAccessor {
     Result<Artist> getArtistByName(@Param("name") String name);
 
 
-    @Query("SELECT * FROM jukebox.artist WHERE rating IN :ratings")
-    Result<Artist> getArtistsByRating(@Param("ratings") List<Double> ratings);
+    @Query("SELECT * FROM jukebox.artist WHERE rating <= :high AND rating >= :low ALLOW FILTERING")
+    Result<Artist> getArtistsByRating(@Param("low") Integer low, @Param("high") Integer high);
+
+    @Query("SELECT * FROM jukebox.artist")
+    Result<Artist> getAllArtists();
 }

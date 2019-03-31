@@ -35,16 +35,32 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/movie", method = RequestMethod.GET)
-    public Response getSong(@RequestParam(value = "name") String name) throws Exception {
+    public Response getMovie(@RequestParam(value = "name") String name) throws Exception {
         try {
             List<Movie> movies = movieService.getMoviesByName(name);
 
-            return new Response<List<Song>>().builder()
+            return new Response<List<Movie>>().builder()
                     .data(movies)
                     .statusCode(HttpStatus.OK.value())
                     .build();
         } catch (Exception e) {
-            return new Response<List<Song>>().builder()
+            return new Response<List<Movie>>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
+
+    @RequestMapping(value = "/movie/artist", method = RequestMethod.GET)
+    public Response getMovieByArtist(@RequestParam(value = "artistName") String artistName) throws Exception {
+        try {
+            List<Movie> movies = movieService.getMoviesByName(artistName);
+            return new Response<List<Movie>>().builder()
+                    .data(movies)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<List<Movie>>().builder()
                     .data(null)
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .build();

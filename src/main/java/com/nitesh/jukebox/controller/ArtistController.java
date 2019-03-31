@@ -32,6 +32,23 @@ public class ArtistController {
         }
     }
 
+    @RequestMapping(value = "/artists", method = RequestMethod.GET)
+    public Response getAllArtists() throws Exception {
+        try {
+            List<Artist> artists = artistService.getAllArtists();
+
+            return new Response<List<Artist>>().builder()
+                    .data(artists)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Artist>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
+
     @RequestMapping(value = "/artist", method = RequestMethod.GET)
     public Response getArtists(@RequestParam(value = "name") String name) throws Exception {
         try {

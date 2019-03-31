@@ -27,6 +27,12 @@ public class ArtistDao {
         return accessor.getArtistByName(name).all();
     }
 
+    public List<Artist> getAllArtists() throws DataAccessException {
+        JukeBoxArtistAccessor accessor = scyllaResource.getAccessor(JukeBoxArtistAccessor.class);
+        return accessor.getAllArtists().all();
+    }
+
+
     public Artist createOrUpdate(final Artist artist) throws DataAccessException {
         Mapper<Artist> artistMapper = scyllaResource.getMapper(Artist.class);
         artistMapper.save(artist);

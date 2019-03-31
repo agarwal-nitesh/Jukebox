@@ -1,11 +1,8 @@
 package com.nitesh.jukebox.service;
 
 
-import com.nitesh.jukebox.dao.scylla.SearchIndexDao;
 import com.nitesh.jukebox.dao.scylla.SongDao;
 import com.nitesh.jukebox.models.entity.Artist;
-import com.nitesh.jukebox.models.entity.SearchIndex;
-import com.nitesh.jukebox.models.entity.SearchIndexType;
 import com.nitesh.jukebox.models.entity.Song;
 import com.nitesh.jukebox.models.request.SongCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +11,12 @@ import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class SongService {
     @Autowired
     SongDao songDao;
-
-    @Autowired
-    SearchIndexDao searchIndexDao;
 
     @Autowired
     ArtistService artistService;
@@ -49,7 +44,6 @@ public class SongService {
                     .name(songCreateRequest.getName())
                     .rating(songCreateRequest.getRating())
                     .build();
-            searchIndexDao.addIndex(SearchIndexType.SONG.toString(), song.getName(), song.getId());
             return this.songDao.createOrUpdate(song);
         } else {
             throw new UnsatisfiedServletRequestParameterException(new String[]{"Artist not found"}, null);
@@ -59,6 +53,12 @@ public class SongService {
 
     public List<Song> getSongsByName(final String songName) {
         return songDao.getSongsByName(songName);
+    }
+
+    public List<Song> getSongsByArtistName(final String artistName) {
+        List<Artist> artists = this.artistService.getArtists(artistName);
+        List<String> artistIds = artists.stream().map(artist -> artist.getId()).collect(Collectors.toList());
+        return songDao.getSongsByArtistIds(artistIds);
     }
 
     public List<Song> getSongsByIds(final List<String> songIds) {

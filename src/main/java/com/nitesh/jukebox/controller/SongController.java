@@ -50,4 +50,21 @@ public class SongController {
                     .build();
         }
     }
+
+    @RequestMapping(value = "/song/artists", method = RequestMethod.GET)
+    public Response getSongByArtistName(@RequestParam(value = "artistName") String artistName) throws Exception {
+        try {
+            List<Song> songs = songService.getSongsByArtistName(artistName);
+
+            return new Response<List<Song>>().builder()
+                    .data(songs)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<List<Song>>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
 }

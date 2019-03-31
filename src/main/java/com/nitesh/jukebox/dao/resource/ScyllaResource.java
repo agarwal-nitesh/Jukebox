@@ -34,10 +34,10 @@ public class ScyllaResource {
     );
 
     private static final List<Class> accessorClassList = Arrays.asList(
-            JukeBoxSearchIndexAccessor.class,
             JukeBoxArtistAccessor.class,
             JukeBoxSongAccessor.class,
-            JukeBoxMovieAccessor.class
+            JukeBoxMovieAccessor.class,
+            JukeBoxPlaylistAccessor.class
     );
 
     private Cluster cluster;

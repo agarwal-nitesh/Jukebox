@@ -37,4 +37,9 @@ public class SongDao {
         Mapper<Song> artistMapper = scyllaResource.getMapper(Song.class);
         artistMapper.delete(songId);
     }
+
+    public List<Song> getSongsByArtistIds(final List<String> ids) throws DataAccessException {
+        JukeBoxSongAccessor accessor = scyllaResource.getAccessor(JukeBoxSongAccessor.class);
+        return accessor.getSongsByArtistIds(ids).all();
+    }
 }
