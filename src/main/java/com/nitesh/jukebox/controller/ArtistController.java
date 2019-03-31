@@ -88,4 +88,21 @@ public class ArtistController {
                     .build();
         }
     }
+
+    @RequestMapping(value = "/artist/trending", method = RequestMethod.GET)
+    public Response getTrendingArtists() throws Exception {
+        try {
+            List<Artist> artists = artistService.getTrendingArtists();
+
+            return new Response<List<Artist>>().builder()
+                    .data(artists)
+                    .statusCode(HttpStatus.OK.value())
+                    .build();
+        } catch (Exception e) {
+            return new Response<Artist>().builder()
+                    .data(null)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+        }
+    }
 }

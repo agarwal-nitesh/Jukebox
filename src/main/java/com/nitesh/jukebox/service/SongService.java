@@ -64,6 +64,7 @@ public class SongService {
         List<Song> songs = songDao.getSongsByName(songName);
         songs.stream().forEach(s -> {
             this.trendingService.incrementMediaAccessCount(TrendingMediaType.SONG, s.getId());
+            this.trendingService.incrementMediaAccessCount(TrendingMediaType.ARTIST, s.getArtist());
         });
         return songs;
     }
