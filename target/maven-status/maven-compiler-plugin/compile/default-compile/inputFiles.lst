@@ -1,0 +1,10 @@
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/service/IPlaylistService.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/models/request/PlaylistCreateRequest.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/service/PlaylistService.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/MvsApplication.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/models/Artist.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/models/Song.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/models/Movie.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/controller/PlaylistController.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/models/Playlist.java
+/Users/niteshagarwal/code/MvsProject/src/main/java/MvsProject/models/response/Response.java
