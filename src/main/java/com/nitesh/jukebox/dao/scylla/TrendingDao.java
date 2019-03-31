@@ -16,11 +16,11 @@ public class TrendingDao {
 
     public void incrementCounter(TrendingMediaType type, String id) {
         JukeBoxTrendingMediaAccessor accessor = this.scyllaResource.getAccessor(JukeBoxTrendingMediaAccessor.class);
-        accessor.updateTrendingMediaCount(type.toString(), System.currentTimeMillis(), id);
+        accessor.updateTrendingMediaCount(type.toString(), id);
     }
 
     public List<TrendingMedia> getTrendingMedia(TrendingMediaType type) {
         JukeBoxTrendingMediaAccessor accessor = this.scyllaResource.getAccessor(JukeBoxTrendingMediaAccessor.class);
-        return accessor.getTrendingMedia(type.toString(), System.currentTimeMillis()-2*60*60*1000).all();
+        return accessor.getTrendingMedia(type.toString()).all();
     }
 }

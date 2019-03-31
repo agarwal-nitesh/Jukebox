@@ -2,6 +2,7 @@ package com.nitesh.jukebox.models.entity;
 
 
 import com.datastax.driver.mapping.annotations.Column;
+import com.datastax.driver.mapping.annotations.Computed;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 import lombok.AllArgsConstructor;
@@ -18,8 +19,8 @@ public class TrendingMedia {
     @Column(name = "type")
     @PartitionKey
     String type;
-    @Column(name = "updated_at")
-    Long updatedAt;
+    @Computed(value = "last_updated")
+    Long lastUpdate;
     @Column(name = "id")
     String id;
     @Column(name = "access_count")

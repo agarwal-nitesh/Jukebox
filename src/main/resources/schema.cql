@@ -47,11 +47,10 @@ CREATE INDEX playlist_name_index ON jukebox.playlist(name);
 
 CREATE TABLE jukebox.trending_media(
     type text,
-    updated_at bigint,
     id text,
     access_count counter,
-    PRIMARY KEY(type, updated_at, id)
-);
+    PRIMARY KEY(type, id)
+) WITH default_time_to_live = 1200;
 
 CREATE MATERIALIZED VIEW jukebox.mv_song_by_artist_id AS
     SELECT * FROM jukebox.song

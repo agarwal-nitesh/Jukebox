@@ -8,9 +8,9 @@ import com.nitesh.jukebox.models.entity.TrendingMedia;
 @Accessor
 public interface JukeBoxTrendingMediaAccessor {
 
-    @Query("SELECT * FROM jukebox.trending_media WHERE type = :type AND updated_at > :updatedAt")
-    Result<TrendingMedia> getTrendingMedia(String type, Long updatedAt);
+    @Query("SELECT type, id, WRITETIME(access_count) as last_updated, access_count FROM jukebox.trending_media WHERE type = :type")
+    Result<TrendingMedia> getTrendingMedia(String type);
 
-    @Query("UPDATE jukebox.trending_media SET access_count = access_count + 1 WHERE type = :mediaType AND updated_at = :updatedAt AND id = :mediaId")
-    void updateTrendingMediaCount(String mediaType, Long updatedAt, String mediaId);
+    @Query("UPDATE jukebox.trending_media SET access_count = access_count + 1 WHERE type = :mediaType AND id = :mediaId")
+    void updateTrendingMediaCount(String mediaType, String mediaId);
 }

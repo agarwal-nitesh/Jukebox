@@ -15,17 +15,10 @@ public class TrendingService {
     @Autowired
     TrendingDao trendingDao;
 
-    @Autowired
-    MovieService movieService;
 
-    @Autowired
-    ArtistService artistService;
-
-    @Autowired
-    JukeBoxService jukeBoxService;
 
     @Value("${trending.NumberOfMedias}")
-    private Integer maxTrendingMedia;
+    private Long maxTrendingMedia;
 
     /*
         Can use ExecutorService to enqueue trending update requests using a thread pool to unblock get requests.
@@ -37,10 +30,14 @@ public class TrendingService {
     }
 
     /*
-        Gets trending media based on access count in last 2 hours, using atomic counters in Scylla.
+        Gets trending media based on access count in last 1 hour, using atomic counters in Scylla.
+        Use WRITETIME property of column to check when it was last updated.
      */
     public List<String> getTrendingMedia(TrendingMediaType trendingMediaType) {
         List<TrendingMedia> medias = this.trendingDao.getTrendingMedia(trendingMediaType);
+        Long tsBefore1Hour = System.currentTimeMillis()/1000- 3600;
+        medias = medias.stream().filter(m -> m.getLastUpdate()/1000000 > tsBefore1Hour).collect(Collectors.toList());
+        medias.sort((m1, m2) -> m2.getAccessCount().compareTo(m1.getAccessCount()));
         return medias.stream().limit(maxTrendingMedia).map(m -> m.getId()).collect(Collectors.toList());
     }
 }
